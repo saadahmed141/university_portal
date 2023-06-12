@@ -1,27 +1,13 @@
 <?php
 include 'connection.php';
 
-$id = $_GET['updateid'];
-
-$sql = "SELECT * FROM `crud` WHERE `crud`.`id` = $id";
-$result = mysqli_query($conn,$sql);
-
-$row = mysqli_fetch_assoc($result);
-
-$name = $row['name'];
-$email = $row['email'];
-$mobile = $row['mobile'];
-$password = $row['password'];
-
-
-
 if(isset($_POST['submit'])){
     $name = $_POST['name'];
     $email = $_POST['email'];
     $mobile = $_POST['mobile'];
     $password = $_POST['password'];
 
-    $sql = "UPDATE `crud` SET `name` = '$name', `email` = '$email', `mobile` = '$mobile', `password` = '$password' WHERE `crud`.`id` = $id;";
+    $sql = "INSERT INTO `crud` (`name`, `email`, `mobile`, `password`) VALUES ('$name', '$email', '$mobile', '$password')";
     $result = mysqli_query($conn,$sql);
 
     if($result){
@@ -51,32 +37,28 @@ if(isset($_POST['submit'])){
         <form method = "post">
         <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name = "name"aria-describedby="emailHelp" autocomplete="off" value = '<?php echo $name?>'   >
-                
+                <input type="text" class="form-control" id="name" name = "name"aria-describedby="emailHelp" autocomplete="off">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" value = '<?php echo $email?>' name= "email" aria-describedby="emailHelp" autocomplete="off" >
-                <div id="emailHelp" class="form-text">We will never share your email with anyone else.</div>
+                <input type="email" class="form-control" id="email" name= "email"aria-describedby="emailHelp" autocomplete="off">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
                 <label for="mobile" class="form-label">Mobile</label>
-                <input type="text" class="form-control"  id="mobile" name = "mobile" value = '<?php echo $mobile ?>' aria-describedby="emailHelp" autocomplete="off"  >
-                
+                <input type="text" class="form-control" id="mobile" name = "mobile"aria-describedby="emailHelp" autocomplete="off">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name = "password" autocomplete="off" 
-                value = '<?php echo $password?>' >
+                <input type="password" class="form-control" id="password" name = "password" autocomplete="off">
             </div>
             
-            <button type="submit" class="btn btn-primary" name = "submit">Update</button>
+            <button type="submit" class="btn btn-primary" name = "submit">Submit</button>
             <button class="btn btn-primary" ><a href="display.php" class="text-light text-decoration-none">Display Records</a></button>
-            
         </form>
     </div>
-
-
 
 
 </body>
